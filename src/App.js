@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import CartContextProvider from "./store/CartContextProvider";
+import AvailableMedicine from "./components/AvailableMedicine/AvailableMedicine";
+import Header from "./components/Header/Header";
+import HeaderForm from "./components/Header/HeaderForm";
 
 function App() {
+  const [medArray, setMedArray] = useState([{}]);
+  const FormDataHandler = (recievedata) => {
+    setMedArray((prev) => [...prev, recievedata]);
+  };
   return (
-    <div className="App">
+    <CartContextProvider>
+      <Header></Header>
+
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <HeaderForm submitData={FormDataHandler}></HeaderForm>
+        <AvailableMedicine items={medArray}></AvailableMedicine>
       </header>
-    </div>
+    </CartContextProvider>
   );
 }
 
