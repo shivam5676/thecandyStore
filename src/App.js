@@ -1,22 +1,33 @@
 import { useState } from "react";
 import CartContextProvider from "./store/CartContextProvider";
-import AvailableMedicine from "./components/AvailableMedicine/AvailableMedicine";
+import AvailableMedicine from "./components/AvailableMedicine/AvailableCandy";
 import Header from "./components/Header/Header";
 import HeaderForm from "./components/Header/HeaderForm";
+import Cart from "./components/cart/Cart";
+import AvailableCandy from "./components/AvailableMedicine/AvailableCandy";
 
 function App() {
-  const [medArray, setMedArray] = useState([{}]);
+  const [cartIsOpen, setCartIsOpen] = useState(false);
+  const cartCloseHandler = () => {
+    setCartIsOpen(false);
+    console.log("false");
+  };
+  const cartOpenHandler=()=>{
+    setCartIsOpen(true);
+  }
+  const [medArray, setMedArray] = useState([]);
   const FormDataHandler = (recievedata) => {
     setMedArray((prev) => [...prev, recievedata]);
   };
   return (
     <CartContextProvider>
-      <Header></Header>
+      {cartIsOpen?<Cart onClose={cartCloseHandler}></Cart>:""}
+      
+      <Header onOpenCart={cartOpenHandler}></Header>
 
-      <header className="App-header">
-        <HeaderForm submitData={FormDataHandler}></HeaderForm>
-        <AvailableMedicine items={medArray}></AvailableMedicine>
-      </header>
+      <HeaderForm submitData={FormDataHandler}></HeaderForm>
+      
+      <AvailableCandy items={medArray}></AvailableCandy>
     </CartContextProvider>
   );
 }

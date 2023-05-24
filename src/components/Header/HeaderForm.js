@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 const HeaderForm = (props) => {
-  const [medicine, setMedicine] = useState("");
+  const [candy, setcandy] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
 
-  const medicineHandler = (event) => {
-    setMedicine(event.target.value);
+  const candyHandler = (event) => {
+    setcandy(event.target.value);
   };
   const descriptionHandler = (event) => {
     setDescription(event.target.value);
@@ -16,7 +16,7 @@ const HeaderForm = (props) => {
   };
  const formData={
     id:Math.random(),
-        medicine:medicine,
+        candy:candy,
         details:description,
         price:+price
     }
@@ -26,13 +26,13 @@ const HeaderForm = (props) => {
   };
   return (
     <form onSubmit={InputDetailsHandler}>
-      <label>medicine name</label>
-      <input type="text" onChange={medicineHandler}></input>
+      <label>candy name</label>
+      <input type="text" onChange={candyHandler} required></input>
       <label>description name</label>
-      <input type="text" onChange={descriptionHandler}></input>
+      <input type="text" onChange={descriptionHandler} required></input>
       <label>price</label>
-      <input type="text" onChange={priceHandler}></input>
-      <button>+Add Medicine</button>
+      <input type="number" onChange={priceHandler} required></input>
+      <button>+Add candy</button>
     </form>
   );
 };
